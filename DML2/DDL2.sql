@@ -1,11 +1,8 @@
-/*
-Practica II - Clase.
-*/
 
-/*
-Crear un procedimiento para insertar y eliminar registros en la tabla  Employees, recibirá como parámetros todos los campos existentes y actualizará las columnas con los nuevos valores que se envíen.
-Debera controlar por medio de Excepción si el registro no existe, y desplegar un mensaje indicándolo.
-*/
+--Practica II - Clase.
+
+--Crear un procedimiento para insertar y eliminar registros en la tabla  Employees, recibirï¿½ como parï¿½metros todos los campos existentes y actualizarï¿½ las columnas con los nuevos valores que se envï¿½en.
+--Debera controlar por medio de Excepciï¿½n si el registro no existe, y desplegar un mensaje indicï¿½ndolo.
 
 create or replace procedure gestiona_employees(p_operacion char, 
  p_emplyee_id       hr.employees.employee_id%type,
@@ -98,13 +95,9 @@ end;
 
 /
 
-/*
-Practica II - Parcial
-*/
+--Practica II - Parcial
 
-/*
-0. Cursores
-*/
+--0. Cursores
 
 declare
    CURSOR cur_emps(p_department_id employees.department_id%type) is
@@ -128,12 +121,10 @@ end;
 
 /
 
-/*
-1. Crear un procedimiento que identifique de la tabla de empleados los N (N será un parámetro a 
-enviar al procedimiento) mejores empleados pagados y los inserte en una tabla llamada 
-TOP_salary( que deberá de tener la siguiente estructura: Employee_id, First_name, Last_name, 
-Salary, Job_name y Department_name).
-*/
+--1. Crear un procedimiento que identifique de la tabla de empleados los N (N serï¿½ un parï¿½metro a 
+--enviar al procedimiento) mejores empleados pagados y los inserte en una tabla llamada 
+--TOP_salary( que deberï¿½ de tener la siguiente estructura: Employee_id, First_name, Last_name, 
+--Salary, Job_name y Department_name).
 
 create table top_salary
 (employee_id Number(6),
@@ -159,11 +150,10 @@ create or replace procedure top_sal(p_N number) is
 	 end loop;
 end;
 
-/*
-2. Crear un procedimiento que identifique los Jefes de la tabla de empleados, e inserte un registro 
-en una tabla llamada Subordinados(con la siguiente estructura: First_name, Last_name, cantidad 
-de empleados a su cargo)
-*/
+
+--2. Crear un procedimiento que identifique los Jefes de la tabla de empleados, e inserte un registro 
+--en una tabla llamada Subordinados(con la siguiente estructura: First_name, Last_name, cantidad 
+--de empleados a su cargo)
 
 create  table subordinados
 (first_name varchar2(20),
@@ -184,11 +174,10 @@ end;
 
 /
 
-/*
-3. Elaborar una función en la cual dado un código de departamento(Parámetro) que retorne el código 
-de empleado y salario de todos aquellos empleados que tenga un salario menor que el salario 
-mínimo definido para su puesto o mayor al salario máximo definido para su puesto.
-*/
+
+--3. Elaborar una funciï¿½n en la cual dado un cï¿½digo de departamento(Parï¿½metro) que retorne el cï¿½digo 
+--de empleado y salario de todos aquellos empleados que tenga un salario menor que el salario 
+--mï¿½nimo definido para su puesto o mayor al salario mï¿½ximo definido para su puesto.
 
 create or replace function retornar_empleados(p_deparment_id employees.department_id%type) return 
 varchar2 is 
@@ -213,10 +202,9 @@ v_valores := retornar_empleados(50);
 dbms_output.put_line(v_valores);
 end;
 
-/*
-4. Crear una función que al indicar el country_id (Párametro) retornara los nombres completos de 
-todos los empleados pertenecientes a ese país.
-*/
+--4. Crear una funciï¿½n que al indicar el country_id (Pï¿½rametro) retornara los nombres completos de 
+--todos los empleados pertenecientes a ese paï¿½s.
+
 
 create or replace function listar_empleados(p_country_id countries.country id%type) return varchar is 
 cursor c_emp is select e.first_name, e.last_name
@@ -233,10 +221,8 @@ end loop;
 return v_listado;
 end;
 
-/*
-5. Crear paquete que contenga 3 procedimientos necesarios para realizar las operaciones de 
-Inserción, actualización y borrado de registros de la tabla Countries
-*/
+--5. Crear paquete que contenga 3 procedimientos necesarios para realizar las operaciones de 
+--Inserciï¿½n, actualizaciï¿½n y borrado de registros de la tabla Countries
 
 create or replace package pkg_countries is
 	  procedure insertar   (p_country_id countries.country_id%type,

@@ -1,61 +1,60 @@
-/*
-Practica I - Clase.
-*/
+
+--Practica I - Clase.
 
 conn hr/hr
 
-create user kzguniga // crear usuario
-identified by kgzuniga; // contraseña
+create user kzguniga --crear usuario
+identified by kgzuniga; --contraseï¿½a
 
-desc all_users; // ver usuarios
+desc all_users; -- ver usuarios
 
-desc hr.employees; // ver empleados
+desc hr.employees; --ver empleados
 
-select * from all_users; // vista de diccionario de datos
+select * from all_users; --vista de diccionario de datos
 
-grant create session, connect to kgzuniga; // privilegio de crear session y conectar con el usuario kgzuniga
+grant create session, connect to kgzuniga; --privilegio de crear session y conectar con el usuario kgzuniga
 
-create role estudiante; // crear rol 
+create role estudiante; --crear rol 
 
-desc user_role_privs // ver roles creados privados
+desc user_role_privs --ver roles creados privados
 
-select username, granted_role from user_role_privs; // ver roles creados privados con permiso adm a un usuario
+select username, granted_role from user_role_privs; --ver roles creados privados con permiso adm a un usuario
 
-conn rh/rh // conexion
+conn rh/rh --conexion
 
-conn kgzuniga1/kgzuniga1 // conexion 
+conn kgzuniga1/kgzuniga1 --conexion 
 
-select * from cat; // mostrar tablas de catalago de datos
+select * from cat; --mostrar tablas de catalago de datos
 
-show user // ver usuario 
+show user --ver usuario 
 
-grant select, insert, update, delete on hr.employees to estudiante; // otorgar privilegios en la tabla empleados a el rol estudiante
+grant select, insert, update, delete on hr.employees to estudiante; --otorgar privilegios en la tabla empleados a el rol estudiante
 
-grant estudiante to kgzuniga1; // otorgar rol con privilegios a usuario 
+grant estudiante to kgzuniga1; --otorgar rol con privilegios a usuario 
 
 select employee_id, first_name, last_name, salary
-* from hr.employees // vista de la tabla empleados, primer y segundo nombre + salario 
+* from hr.employees --vista de la tabla empleados, primer y segundo nombre + salario 
 
-delete hr.employees // borrar tabla 
+delete hr.employees --borrar tabla 
 
-delete hr.regions where region_id = 8; // borrar registro especifico de una tabla
+delete hr.regions where region_id = 8; --borrar registro especifico de una tabla
 
 update hr.employees
-set salary = salary + 1000; // aumentar el salario a todos los empleados en 1000
+set salary = salary + 1000; --aumentar el salario a todos los empleados en 1000
 
 update hr. regions
 set region_name = 'XYZ'
-where region_id = 7; // agregar registro especifico a una tabla
+where region_id = 7; --agregar registro especifico a una tabla
 
 grant connect, create any table, dba 
-to estudiante; // privilegios de crear tabla y asignar rol dba a estudiante
+to estudiante; --privilegios de crear tabla y asignar rol dba a estudiante
 
 grant connect, create any table, create procedure
-to estudiante; // privilegios de crear tabla y procedimiento a estudiante
+to estudiante; --privilegios de crear tabla y procedimiento a estudiante
 
-desc user role_sys_privs verificar privilegios otorgados a usuario
+desc user role_sys_privs --verificar privilegios otorgados a usuario
 
-desc role_sys_privs // verificar privilegios otorgados a un rol 
+desc role_sys_privs --verificar privilegios otorgados a un rol 
 
 select * from role_sys_privs
 where role = 'estudiante'
@@ -65,26 +64,22 @@ from role_tab_privs
 where role = 'estudiante' 
 order by 1 
 
-desc user_tab_privs_made // privilegios hechos en tablas
-desc user_col_privs_made // privilegios hechos sobre columnas
-desc user_tab_privs_recd // privilegios recibidos
-desc user_col_privs_recd // privilegios recibidos sobre columnas
+desc user_tab_privs_made --privilegios hechos en tablas
+desc user_col_privs_made --privilegios hechos sobre columnas
+desc user_tab_privs_recd --privilegios recibidos
+desc user_col_privs_recd --privilegios recibidos sobre columnas
 
 revoke estudiante
-from kgzuniga; // rebocacion de privilegios
+from kgzuniga; --rebocacion de privilegios
 
-drop role estudiante; // eliminar rol
+drop role estudiante; --eliminar rol
 
-drop user estudiante; // eliminar usuario 
+drop user estudiante; --eliminar usuario 
 
-/* 
-Practica I - Parcial
-*/
+--Practica I - Parcial 
 
-/*
-1. Crear una función que reciba como parámetro de entrada el nombre del departamento (Ejemplo “Sales”) y calcule el salario promedio del departamento. 
-La función deberá devolver un mensaje como el siguiente: “El departamento Sales tiene un salario promedio de 8955” 
-*/
+--1. Crear una funciï¿½n que reciba como parï¿½metro de entrada el nombre del departamento (Ejemplo ï¿½Salesï¿½) y calcule el salario promedio del departamento. 
+--La funciï¿½n deberï¿½ devolver un mensaje como el siguiente: ï¿½El departamento Sales tiene un salario promedio de 8955ï¿½ 
 
 create or replace function department_avg(p_department_name hr.departments department_name%type) return varchar is
 v_avg number;
@@ -115,10 +110,8 @@ l
 
 /
 
-/*     
-2.Crear una función que recibirá como parámetro el Código del empleado y retornara un valor Boolean deberá comprobar, la existencia de historia de un empleado en la tabla Job_History. 
-La función devolverá TRUE si encuentra registros en la tabla y FALSE si no encuentra registros.
-*/
+--2.Crear una funciï¿½n que recibirï¿½ como parï¿½metro el Cï¿½digo del empleado y retornara un valor Boolean deberï¿½ comprobar, la existencia de historia de un empleado en la tabla Job_History. 
+--La funciï¿½n devolverï¿½ TRUE si encuentra registros en la tabla y FALSE si no encuentra registros.
 
 create or replace function empleado_tiene_historia(p_employee_id hr. employees.employee_id%type) return boolean is
 v_contador number;
@@ -149,11 +142,10 @@ end;
 
 /
 
-/*
-3. Crear una función que reciba como parámetro el Employee_id, y retorne la cantidad de subordinados o personal a cargo que este tiene (El campo manager_id indica el jefe de cada empleado)
-*/
+--3. Crear una funciï¿½n que reciba como parï¿½metro el Employee_id, y retorne la cantidad de subordinados o personal a cargo que este tiene (El campo manager_id indica el jefe de cada empleado)
 
 create or replace function personal_acargo(p_employee_id hr.employees.employee_id%type) return number is 
+
 v_cantidad number;
  begin 
    select count (*)
@@ -174,10 +166,9 @@ end;
 
 /
 
-/*
-4. Crear un procedimiento para insertar registros en la tabla  Employees,  recibirá como parámetros todos los campos existentes. 
-Deberá controlar por medio de excepción si el Employee_id ya existe en la tabla de empleados y desplegar mensaje indicándolo. 
-*/
+--4. Crear un procedimiento para insertar registros en la tabla  Employees,  recibirï¿½ como parï¿½metros todos los campos existentes. 
+--Deberï¿½ controlar por medio de excepciï¿½n si el Employee_id ya existe en la tabla de empleados y desplegar mensaje indicï¿½ndolo. 
+
 
 create or replace procedure ins_employees(
   p_emplyee_id     hr.employees.employee_id%type,
